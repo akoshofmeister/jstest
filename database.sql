@@ -13,7 +13,8 @@ CREATE TABLE `orders` (
   `zip` varchar(4) COLLATE utf8mb4_hungarian_ci NOT NULL,
   `city` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
   `street` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `number` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL
+  `number` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci ROW_FORMAT=COMPACT;
 
 CREATE TABLE `order_products` (

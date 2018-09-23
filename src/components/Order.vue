@@ -36,6 +36,13 @@
 					<span class="helper-text" data-error="Kötelező"></span>
 				</div>
 			</div>
+			<div class="row">
+				<div class="input-field col s3">
+					<input id="phone" type="text" class="validate" v-model="phone" required>
+					<label for="phone">Telefonszám</label>
+					<span class="helper-text" data-error="Kötelező"></span>
+				</div>
+			</div>
 		</form>
 	</div>
 </template>
@@ -51,7 +58,8 @@ export default {
 			zip: '',
 			city: '',
 			street: '',
-			number: ''
+			number: '',
+			phone: ''
 		}
 	},
 	methods: {
@@ -88,6 +96,11 @@ export default {
 				invalid = true
 			}
 
+			if( this.phone == '' ) {
+				document.getElementById('phone').classList.add('invalid')
+				invalid = true
+			}
+
 			if (invalid)
 				return
 
@@ -97,7 +110,8 @@ export default {
 				number: this.number,
 				city: this.city,
 				street: this.street,
-				zip: this.zip
+				zip: this.zip,
+				phone: this.phone
 			})
 			
 			this.firstname = ''
@@ -106,6 +120,7 @@ export default {
 			this.city = ''
 			this.street = ''
 			this.number = ''
+			this.phone = ''
 		}
 	},
 	mounted () {

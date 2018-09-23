@@ -261,6 +261,7 @@ export default {
 					city: obj.city,
 					street: obj.street,
 					zip: obj.zip,
+					phone: obj.phone,
 					products: Object.keys(this.cart.items).reduce((acc, id) => {
 						acc.push({ id: parseInt(id), amount: this.cart.items[id]})
 						return acc

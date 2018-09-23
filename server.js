@@ -66,6 +66,7 @@ app.post('/order', (req, res) => {
 		!req.body.city ||
 		!req.body.number ||
 		!req.body.street ||
+		!req.body.phone ||
 		!req.body.products ||
 		!req.body.products.length
 	) {
@@ -94,8 +95,8 @@ app.post('/order', (req, res) => {
 						req.body.products.every(prod => prodIds.indexOf(prod.id) != -1)
 					) {
 						connection.query(
-							'INSERT INTO orders (firstname, lastname, zip, city, number, street) VALUES (?,?,?,?,?,?)', 
-							[req.body.firstname, req.body.lastname, req.body.zip, req.body.city, req.body.number, req.body.street],
+							'INSERT INTO orders (firstname, lastname, zip, city, number, street, phone) VALUES (?,?,?,?,?,?,?)', 
+							[req.body.firstname, req.body.lastname, req.body.zip, req.body.city, req.body.number, req.body.street, req.body.phone],
 							function (error, results) {
 								if (error) throw error;
 	
