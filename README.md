@@ -1,6 +1,18 @@
-# Teszt
+# jstest
 
-Szerver: node server.js  
-Kliens: npm run dev  
+> JS test for Tappointment
 
-Az adatbázis feltölthető a database.sql fájlból.
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# run server
+node server.js
+
+# upload mysql database with
+database.sql
