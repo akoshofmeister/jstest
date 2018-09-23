@@ -246,42 +246,44 @@ export default {
 			}
 		},
 		doneOrder (obj) {
-			axios.post('http://localhost:3000/order', {
-				firstname: obj.firstname,
-				lastname: obj.lastname,
-				number: obj.number,
-				city: obj.city,
-				street: obj.street,
-				zip: obj.zip,
-				products: Object.keys(this.cart.items).reduce((acc, id) => {
-					acc.push({ id: parseInt(id), amount: this.cart.items[id]})
-					return acc
-				}, [])
-			})
-				.then((res) => {
-					this.cart.balance = 0;
-					this.cart.items = {};
+			this.modal.close();
+			this.cart.balance = 0;
 
-					this.modal.close();
+			setTimeout(() => {
+				this.currentModal = 'DoneOrder'
+				this.modalProps = {done: false}
+				this.modal.open();
 
-					setTimeout(() => {
-						this.currentModal = 'DoneOrder'
-						this.modalProps = {}
-						this.modal.open();
-					}, 300)
+				axios.post('http://localhost:3000/order', {
+					firstname: obj.firstname,
+					lastname: obj.lastname,
+					number: obj.number,
+					city: obj.city,
+					street: obj.street,
+					zip: obj.zip,
+					products: Object.keys(this.cart.items).reduce((acc, id) => {
+						acc.push({ id: parseInt(id), amount: this.cart.items[id]})
+						return acc
+					}, [])
 				})
-				.catch((err) => {
-					this.cart.balance = 0;
-					this.cart.items = {};
-					
-					this.modal.close();
+					.then((res) => {
+						this.cart.items = {};
+						setTimeout(() => {
+							this.modalProps = {done: true}
+						}, 1000)
+					})
+					.catch((err) => {
+						this.cart.items = {};
+						
+						this.modal.close();
 
-					setTimeout(() => {
-						this.currentModal = 'FailedOrder'
-						this.modalProps = {}
-						this.modal.open();
-					}, 300)
-				})
+						setTimeout(() => {
+							this.currentModal = 'FailedOrder'
+							this.modalProps = {}
+							this.modal.open();
+						}, 300)
+					})
+			}, 300)
 		},
 		openCart () {
 			this.modal.isOpen && this.modal.close();
